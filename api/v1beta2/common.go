@@ -17,6 +17,7 @@ limitations under the License.
 package v1beta2
 
 import (
+	"fmt"
 	"strconv"
 
 	"k8s.io/apimachinery/pkg/util/intstr"
@@ -80,11 +81,21 @@ func defaultIBMVPCMachineSpec(spec *IBMVPCMachineSpec) {
 	}
 }
 
-func validateBootVolume(spec IBMVPCMachineSpec) field.ErrorList {
+func validateVolumes(spec IBMVPCMachineSpec) field.ErrorList {
 	var allErrs field.ErrorList
 
 	if spec.BootVolume == nil {
 		return allErrs
+	}
+
+	for i := range spec.AdditionalVolumes {
+		if spec.AdditionalVolumes[i].SizeGiB < 10 || spec.AdditionalVolumes[i].SizeGiB > 250 {
+			allErrs = append(allErrs, field.Invalid(field.NewPath(fmt.Sprintf("spec.AdditionalVolumes[%d]", i)), spec, "valid VPCVolume size is 10 - 250 GB"))
+		}
+
+		if spec.AdditionalVolumes[i].Iops != 0 && spec.AdditionalVolumes[i].Profile != "custom" {
+			allErrs = append(allErrs, field.Invalid(field.NewPath(fmt.Sprintf("spec.AdditionalVolumes[%d]", i)), spec, "iops applicable only to volumes using a profile of type `custom`"))
+		}
 	}
 
 	if spec.BootVolume.SizeGiB < 10 || spec.BootVolume.SizeGiB > 250 {
