@@ -861,11 +861,6 @@ func (in *IBMPowerVSResourceReference) DeepCopyInto(out *IBMPowerVSResourceRefer
 		*out = new(string)
 		**out = **in
 	}
-	if in.Zone != nil {
-		in, out := &in.Zone, &out.Zone
-		*out = new(string)
-		**out = **in
-	}
 	if in.RegEx != nil {
 		in, out := &in.RegEx, &out.RegEx
 		*out = new(string)

@@ -324,7 +324,7 @@ type CosInstance struct {
 	BucketRegion string `json:"bucketRegion,omitempty"`
 }
 
-// PowerVSWorkspace represent details of PowerVS Workspace(Service Instance)
+// PowerVSWorkspace represent details of PowerVS Workspace(Service Instance).
 type PowerVSWorkspace struct {
 	// name of resource.
 	// +kubebuilder:validation:MinLength=1

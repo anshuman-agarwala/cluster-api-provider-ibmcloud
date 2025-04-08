@@ -477,12 +477,6 @@ spec:
                       In case of multiple resources matches the provided regular expression the first matched resource will be selected
                     minLength: 1
                     type: string
-                  zone:
-                    description: |-
-                      zone is the name of Power VS zone of the workspace
-                      possible values can be found here https://cloud.ibm.com/docs/power-iaas?topic=power-iaas-creating-power-virtual-server.
-                      the zone should have PER capabilities, or else system will give error.
-                    type: string
                 type: object
               resourceGroup:
                 description: |-
@@ -504,12 +498,6 @@ spec:
                       Regular expression to match resource,
                       In case of multiple resources matches the provided regular expression the first matched resource will be selected
                     minLength: 1
-                    type: string
-                  zone:
-                    description: |-
-                      zone is the name of Power VS zone of the workspace
-                      possible values can be found here https://cloud.ibm.com/docs/power-iaas?topic=power-iaas-creating-power-virtual-server.
-                      the zone should have PER capabilities, or else system will give error.
                     type: string
                 type: object
               serviceInstance:
@@ -539,12 +527,6 @@ spec:
                       Regular expression to match resource,
                       In case of multiple resources matches the provided regular expression the first matched resource will be selected
                     minLength: 1
-                    type: string
-                  zone:
-                    description: |-
-                      zone is the name of Power VS zone of the workspace
-                      possible values can be found here https://cloud.ibm.com/docs/power-iaas?topic=power-iaas-creating-power-virtual-server.
-                      the zone should have PER capabilities, or else system will give error.
                     type: string
                 type: object
               serviceInstanceID:
@@ -960,7 +942,7 @@ spec:
               workspaces:
                 items:
                   description: PowerVSWorkspace represent details of PowerVS Workspace(Service
-                    Instance)
+                    Instance).
                   properties:
                     dhcpNetwork:
                       description: DHCPServer contains the DHCP server configurations.
