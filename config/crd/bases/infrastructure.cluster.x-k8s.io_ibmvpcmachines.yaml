@@ -280,6 +280,8 @@ spec:
                     both
                   rule: (has(self.offeringCRN) && !has(self.versionCRN)) || (!has(self.offeringCRN)
                     && has(self.versionCRN))
+              failureDomain:
+                type: string
               image:
                 description: |-
                   Image is the OS image which would be install on the instance.

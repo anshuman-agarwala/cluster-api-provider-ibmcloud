@@ -216,6 +216,12 @@ spec:
                               In case of multiple resources matches the provided regular expression the first matched resource will be selected
                             minLength: 1
                             type: string
+                          zone:
+                            description: |-
+                              zone is the name of Power VS zone of the workspace
+                              possible values can be found here https://cloud.ibm.com/docs/power-iaas?topic=power-iaas-creating-power-virtual-server.
+                              the zone should have PER capabilities, or else system will give error.
+                            type: string
                         type: object
                       imageRef:
                         description: |-
@@ -263,6 +269,12 @@ spec:
                               Regular expression to match resource,
                               In case of multiple resources matches the provided regular expression the first matched resource will be selected
                             minLength: 1
+                            type: string
+                          zone:
+                            description: |-
+                              zone is the name of Power VS zone of the workspace
+                              possible values can be found here https://cloud.ibm.com/docs/power-iaas?topic=power-iaas-creating-power-virtual-server.
+                              the zone should have PER capabilities, or else system will give error.
                             type: string
                         type: object
                       processorType:
@@ -326,6 +338,12 @@ spec:
                               Regular expression to match resource,
                               In case of multiple resources matches the provided regular expression the first matched resource will be selected
                             minLength: 1
+                            type: string
+                          zone:
+                            description: |-
+                              zone is the name of Power VS zone of the workspace
+                              possible values can be found here https://cloud.ibm.com/docs/power-iaas?topic=power-iaas-creating-power-virtual-server.
+                              the zone should have PER capabilities, or else system will give error.
                             type: string
                         type: object
                       serviceInstanceID:
