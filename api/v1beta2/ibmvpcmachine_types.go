@@ -57,7 +57,8 @@ type IBMVPCMachineSpec struct {
 
 	// Zone is the place where the instance should be created. Example: us-south-3
 	// TODO: Actually zone is transparent to user. The field user can access is location. Example: Dallas 2
-	Zone string `json:"zone"`
+	Zone          string  `json:"zone"`
+	FailureDomain *string `json:"failureDomain,omitempty"`
 
 	// Profile indicates the flavor of instance. Example: bx2-8x32	means 8 vCPUs	32 GB RAM	16 Gbps
 	// TODO: add a reference link of profile

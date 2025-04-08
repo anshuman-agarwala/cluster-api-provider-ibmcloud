@@ -264,7 +264,7 @@ func (m *MachineScope) CreateMachine() (*vpcv1.Instance, error) { //nolint: gocy
 	}
 
 	zone := &vpcv1.ZoneIdentity{
-		Name: &m.IBMVPCMachine.Spec.Zone,
+		Name: m.IBMVPCMachine.Spec.FailureDomain,
 	}
 
 	// Populate Placement target details, if provided.

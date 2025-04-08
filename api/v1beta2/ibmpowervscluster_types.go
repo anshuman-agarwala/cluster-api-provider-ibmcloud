@@ -140,6 +140,8 @@ type IBMPowerVSClusterSpec struct {
 	// Ignition defined options related to the bootstrapping systems where Ignition is used.
 	// +optional
 	Ignition *Ignition `json:"ignition,omitempty"`
+
+	Workspaces []PowerVSWorkspace `json:"workspaces,omitempty"`
 }
 
 // Ignition defines options related to the bootstrapping systems where Ignition is used.
@@ -223,6 +225,9 @@ type IBMPowerVSClusterStatus struct {
 
 	// transitGateway is reference to IBM Cloud TransitGateway.
 	TransitGateway *TransitGatewayStatus `json:"transitGateway,omitempty"`
+
+	// failureDomains is a list of failure domain objects synced from the infrastructure provider.
+	FailureDomains capiv1beta1.FailureDomains `json:"failureDomains,omitempty"`
 
 	// cosInstance is reference to IBM Cloud COS Instance resource.
 	COSInstance *ResourceReference `json:"cosInstance,omitempty"`
@@ -317,6 +322,26 @@ type CosInstance struct {
 
 	// bucketRegion is IBM cloud COS bucket region
 	BucketRegion string `json:"bucketRegion,omitempty"`
+}
+
+// PowerVSWorkspace represent details of PowerVS Workspace(Service Instance)
+type PowerVSWorkspace struct {
+	// name of resource.
+	// +kubebuilder:validation:MinLength=1
+	// +kubebuilder:validation:MaxLength:=63
+	// +kubebuilder:validation:Pattern=`^([a-zA-Z]|[a-zA-Z][-_a-zA-Z0-9]*[a-zA-Z0-9])$`
+	// +optional
+	Name *string `json:"name,omitempty"`
+	// id of resource.
+	// +optional
+	ID *string `json:"id,omitempty"`
+	// zone is the name of Power VS zone of the workspace
+	// possible values can be found here https://cloud.ibm.com/docs/power-iaas?topic=power-iaas-creating-power-virtual-server.
+	// the zone should have PER capabilities, or else system will give error.
+	// +optional
+	Zone *string `json:"zone,omitempty"`
+
+	DHCPNetwork DHCPServer `json:"dhcpNetwork,omitempty"`
 }
 
 // GetConditions returns the observations of the operational state of the IBMPowerVSCluster resource.

@@ -148,6 +148,12 @@ type IBMPowerVSResourceReference struct {
 	// +optional
 	Name *string `json:"name,omitempty"`
 
+	// zone is the name of Power VS zone of the workspace
+	// possible values can be found here https://cloud.ibm.com/docs/power-iaas?topic=power-iaas-creating-power-virtual-server.
+	// the zone should have PER capabilities, or else system will give error.
+	// +optional
+	Zone *string `json:"zone,omitempty"`
+
 	// Regular expression to match resource,
 	// In case of multiple resources matches the provided regular expression the first matched resource will be selected
 	// +kubebuilder:validation:MinLength=1
