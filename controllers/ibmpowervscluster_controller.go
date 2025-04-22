@@ -394,17 +394,17 @@ func (r *IBMPowerVSClusterReconciler) reconcile(clusterScope *scope.PowerVSClust
 	// update cluster object with loadbalancer host name
 	clusterScope.IBMPowerVSCluster.Spec.ControlPlaneEndpoint.Host = *hostName
 	clusterScope.IBMPowerVSCluster.Spec.ControlPlaneEndpoint.Port = clusterScope.APIServerPort()
-	clusterScope.IBMPowerVSCluster.Status.Ready = true
 	if clusterScope.IBMPowerVSCluster.Status.FailureDomains == nil && clusterScope.IBMPowerVSCluster.Spec.Workspaces != nil {
 		fd := make(capiv1beta1.FailureDomains)
 		for _, workspace := range clusterScope.IBMPowerVSCluster.Spec.Workspaces {
-			fd[*workspace.Zone] = capiv1beta1.FailureDomainSpec{
+			fd[*workspace.ID] = capiv1beta1.FailureDomainSpec{
 				ControlPlane: true,
 				Attributes:   map[string]string{},
 			}
 		}
 		clusterScope.IBMPowerVSCluster.Status.FailureDomains = fd
 	}
+	clusterScope.IBMPowerVSCluster.Status.Ready = true
 	return ctrl.Result{}, nil
 }
 

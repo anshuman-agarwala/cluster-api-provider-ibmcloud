@@ -984,29 +984,6 @@ spec:
                           description: PowerVSWorkspace represent details of PowerVS
                             Workspace(Service Instance).
                           properties:
-                            dhcpNetwork:
-                              description: DHCPServer contains the DHCP server configurations.
-                              properties:
-                                cidr:
-                                  description: Optional cidr for DHCP private network
-                                  type: string
-                                dnsServer:
-                                  default: 1.1.1.1
-                                  description: Optional DNS Server for DHCP service
-                                  type: string
-                                id:
-                                  description: Optional id of the existing DHCPServer
-                                  type: string
-                                name:
-                                  description: Optional name of DHCP Service. Only
-                                    alphanumeric characters and dashes are allowed.
-                                  type: string
-                                snat:
-                                  default: true
-                                  description: Optional indicates if SNAT will be
-                                    enabled for DHCP service
-                                  type: boolean
-                              type: object
                             id:
                               description: id of resource.
                               type: string

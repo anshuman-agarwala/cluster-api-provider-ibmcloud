@@ -197,6 +197,10 @@ spec:
                     description: IBMPowerVSMachineSpec defines the desired state of
                       IBMPowerVSMachine.
                     properties:
+                      failureDomain:
+                        description: FailureDomain specified the zone where the machine
+                          is deployed
+                        type: string
                       image:
                         description: |-
                           Image the reference to the image which is used to create the instance.

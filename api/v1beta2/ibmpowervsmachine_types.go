@@ -132,6 +132,9 @@ type IBMPowerVSMachineSpec struct {
 	// ProviderID is the unique identifier as specified by the cloud provider.
 	// +optional
 	ProviderID *string `json:"providerID,omitempty"`
+
+	// FailureDomain specified the zone where the machine is deployed
+	FailureDomain *string `json:"failureDomain,omitempty"`
 }
 
 // IBMPowerVSResourceReference is a reference to a specific PowerVS resource by ID, Name or RegEx

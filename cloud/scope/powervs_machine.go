@@ -171,16 +171,20 @@ func NewPowerVSMachineScope(params PowerVSMachineScopeParams) (scope *PowerVSMac
 	scope.ResourceClient = rc
 
 	var serviceInstanceID, serviceInstanceName string
-	if params.IBMPowerVSMachine.Spec.ServiceInstanceID != "" {
-		serviceInstanceID = params.IBMPowerVSMachine.Spec.ServiceInstanceID
-	} else if params.IBMPowerVSMachine.Spec.ServiceInstance != nil && params.IBMPowerVSMachine.Spec.ServiceInstance.ID != nil {
-		serviceInstanceID = *params.IBMPowerVSMachine.Spec.ServiceInstance.ID
-	} else {
-		serviceInstanceName = fmt.Sprintf("%s-%s", params.IBMPowerVSCluster.GetName(), "serviceInstance")
-		if params.IBMPowerVSCluster.Spec.ServiceInstance != nil && params.IBMPowerVSCluster.Spec.ServiceInstance.Name != nil {
-			serviceInstanceName = *params.IBMPowerVSCluster.Spec.ServiceInstance.Name
-		}
+	// if params.IBMPowerVSMachine.Spec.ServiceInstanceID != "" {
+	// 	serviceInstanceID = params.IBMPowerVSMachine.Spec.ServiceInstanceID
+	// } else if params.IBMPowerVSMachine.Spec.ServiceInstance != nil && params.IBMPowerVSMachine.Spec.ServiceInstance.ID != nil {
+	// 	serviceInstanceID = *params.IBMPowerVSMachine.Spec.ServiceInstance.ID
+	// } else {
+	// 	serviceInstanceName = fmt.Sprintf("%s-%s", params.IBMPowerVSCluster.GetName(), "serviceInstance")
+	// 	if params.IBMPowerVSCluster.Spec.ServiceInstance != nil && params.IBMPowerVSCluster.Spec.ServiceInstance.Name != nil {
+	// 		serviceInstanceName = *params.IBMPowerVSCluster.Spec.ServiceInstance.Name
+	// 	}
+	// }
+	if params.IBMPowerVSMachine.Spec.FailureDomain != nil {
+		serviceInstanceID = *params.IBMPowerVSMachine.Spec.FailureDomain
 	}
+
 	serviceInstance, err := rc.GetServiceInstance(serviceInstanceID, serviceInstanceName, params.IBMPowerVSCluster.Spec.Zone)
 	if err != nil {
 		params.Logger.Error(err, "failed to get PowerVS service instance details", "name", serviceInstanceName, "id", serviceInstanceID)

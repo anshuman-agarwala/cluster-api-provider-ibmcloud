@@ -949,6 +949,7 @@ func autoConvert_v1beta2_IBMPowerVSMachineSpec_To_v1beta1_IBMPowerVSMachineSpec(
 		return err
 	}
 	out.ProviderID = (*string)(unsafe.Pointer(in.ProviderID))
+	// WARNING: in.FailureDomain requires manual conversion: does not exist in peer-type
 	return nil
 }
 

@@ -340,8 +340,6 @@ type PowerVSWorkspace struct {
 	// the zone should have PER capabilities, or else system will give error.
 	// +optional
 	Zone *string `json:"zone,omitempty"`
-
-	DHCPNetwork DHCPServer `json:"dhcpNetwork,omitempty"`
 }
 
 // GetConditions returns the observations of the operational state of the IBMPowerVSCluster resource.
