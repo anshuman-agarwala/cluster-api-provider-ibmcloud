@@ -181,11 +181,12 @@ func NewPowerVSMachineScope(params PowerVSMachineScopeParams) (scope *PowerVSMac
 	// 		serviceInstanceName = *params.IBMPowerVSCluster.Spec.ServiceInstance.Name
 	// 	}
 	// }
-	if params.IBMPowerVSMachine.Spec.FailureDomain != nil {
-		serviceInstanceID = *params.IBMPowerVSMachine.Spec.FailureDomain
+
+	if params.Machine.Spec.FailureDomain != nil {
+		serviceInstanceID = *params.Machine.Spec.FailureDomain
 	}
 
-	serviceInstance, err := rc.GetServiceInstance(serviceInstanceID, serviceInstanceName, params.IBMPowerVSCluster.Spec.Zone)
+	serviceInstance, err := rc.GetServiceInstance(serviceInstanceID, "", params.IBMPowerVSCluster.Spec.Zone)
 	if err != nil {
 		params.Logger.Error(err, "failed to get PowerVS service instance details", "name", serviceInstanceName, "id", serviceInstanceID)
 		return nil, err
