@@ -399,7 +399,7 @@ func (r *IBMPowerVSClusterReconciler) reconcile(clusterScope *scope.PowerVSClust
 		for _, workspace := range clusterScope.IBMPowerVSCluster.Spec.Workspaces {
 			fd[*workspace.ID] = capiv1beta1.FailureDomainSpec{
 				ControlPlane: true,
-				Attributes:   map[string]string{},
+				Attributes:   map[string]string{"network": *workspace.NetworkID},
 			}
 		}
 		clusterScope.IBMPowerVSCluster.Status.FailureDomains = fd

@@ -953,6 +953,10 @@ spec:
                       minLength: 1
                       pattern: ^([a-zA-Z]|[a-zA-Z][-_a-zA-Z0-9]*[a-zA-Z0-9])$
                       type: string
+                    networkID:
+                      description: networkID is the name of the PowerVS network that
+                        has to be used for the given workspace
+                      type: string
                     zone:
                       description: |-
                         zone is the name of Power VS zone of the workspace

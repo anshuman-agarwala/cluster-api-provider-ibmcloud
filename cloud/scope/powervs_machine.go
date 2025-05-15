@@ -182,10 +182,14 @@ func NewPowerVSMachineScope(params PowerVSMachineScopeParams) (scope *PowerVSMac
 	// 	}
 	// }
 
-	if params.Machine.Spec.FailureDomain != nil {
-		serviceInstanceID = *params.Machine.Spec.FailureDomain
+	machine, err := util.GetOwnerMachine(context.TODO(), params.Client, params.IBMPowerVSMachine.ObjectMeta)
+	if err != nil {
+		return nil, err
 	}
-
+	if machine.Spec.FailureDomain != nil {
+		serviceInstanceID = *machine.Spec.FailureDomain
+	}
+	params.Logger.Info("PowerVS service instance ID", "serviceInstanceID", serviceInstanceID)
 	serviceInstance, err := rc.GetServiceInstance(serviceInstanceID, "", nil)
 	if err != nil {
 		params.Logger.Error(err, "failed to get PowerVS service instance details", "name", serviceInstanceName, "id", serviceInstanceID)
@@ -308,12 +312,14 @@ func (m *PowerVSMachineScope) CreateMachine() (*models.PVMInstanceReference, err
 		}
 	}
 	network := s.Network
-	if network.ID == nil && network.Name == nil && network.RegEx == nil {
-		// if the network is nil, Fetch from cluster.
-		if m.IBMPowerVSCluster.Status.Network != nil && m.IBMPowerVSCluster.Status.Network.ID != nil {
-			network.ID = m.IBMPowerVSCluster.Status.Network.ID
-		}
-	}
+	// if network.ID == nil && network.Name == nil && network.RegEx == nil {
+	// 	// if the network is nil, Fetch from cluster.
+	// 	if m.IBMPowerVSCluster.Status.Network != nil && m.IBMPowerVSCluster.Status.Network.ID != nil {
+	// 		network.ID = m.IBMPowerVSCluster.Status.Network.ID
+	// 	}
+	// }
+	nid := m.Cluster.Status.FailureDomains[*m.Machine.Spec.FailureDomain].Attributes["network"]
+	network.ID = &nid
 
 	networkID, err := getNetworkID(network, m)
 	if err != nil {

@@ -141,7 +141,7 @@ func (s *Service) GetServiceInstance(id, name string, zone *string) (*resourceco
 	case 1:
 		return &serviceInstancesList[0], nil
 	default:
-		errStr := fmt.Errorf("there exist more than one service instance ID with same name %s, Try setting serviceInstance.ID", name)
+		errStr := fmt.Errorf("anshuman1234 there exist more than one service instance ID with same name %s, Try setting serviceInstance.ID, len: %v, si0: %v, %v", name, len(serviceInstancesList), *serviceInstancesList[0].ID, *serviceInstancesList[1].ID)
 		return nil, errStr
 	}
 }
